@@ -29,13 +29,35 @@ Fungsi yang bisa digunakan antara lain :
   - password_hash
   
 2. REGISTER
-  cara termudah untuk membuat action register di controller namun syaratnya ketika membuat form input name nya harus sama dengan kolom didatabase 
+  cara termudah untuk membuat action register di controller namun syaratnya ketika membuat form input name nya harus sama dengan kolom didatabase kemudian buat variabel : 
+  ```
+  $data = $this->input->post();
+  //ini akan otomatis membuat array sesuai dengan database
+  ```
+  atau bisa juga dengan di deskripsi secara manual :
+  ```php 
+  	$data = array(
+     'email' => $this->input->post('email'),
+			  'password' => $this->input->post('password'),
+     'confirm_password' => $this->input->post('confirm_password'),
+			  'username' => $this->input->post('username')
+     );
+  ```
+  jika ingin menggunakan konfirmasi password gunakan seperti contoh diatas untuk namanya
   
-  kemudian buat variabel $data = $this->input->post();
   syntaxnya :
   ```php
   register('nama_table', $data);
   ```
+  jika ingin password anda menggunakan enkripsi bisa juga langsung dimasukkan pada parameter ke 3
+  syntaxnya :
+  ```php
+  register('nama_tabel_diDB', $data, 'tipe_enkripsi');
+  ```
+  
+  tipe enkripsi yang bisa digunakan : 
+  - md5
+  - password_hash
   
 3. SET SESSION
   cara lebih singkat untuk membuat sesi
